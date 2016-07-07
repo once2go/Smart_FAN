@@ -1,0 +1,12 @@
+file.open("imode.lua","w+")
+file.writeline([[print("Settup init mode")]])
+file.writeline([[wifi.setmode(wifi.SOFTAP)]])
+file.writeline([[cfg={}]])
+file.writeline([[cfg.ssid="I_am_smart_FAN"]])
+file.writeline([[cfg.pwd="11111111"]])
+file.writeline([[wifi.ap.config(cfg)]])
+file.writeline([[dofile("credset.lua")]])
+file.writeline([[print("Waiting for setup")]])
+file.flush()
+file.close()
+

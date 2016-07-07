@@ -23,10 +23,10 @@ sv=net.createServer(net.TCP, 30)
      end
      if ready and ( k == "config") then 
      	if v then 
-     		dofile("conmode.lua")
+     		dofile("writecred.lua")
      	else 
-     		dofile("init.lua")
-     		end
+     		node.restart()
+     	end
      end
      if response == '' then response = '{"status":"Unknown command"}' end 
      end
