@@ -24,6 +24,7 @@ public class Converter {
 
     public static void convert() {
         List<String> list = FileScanner.getScripts();
+        StringBuilder globalBuilder = new StringBuilder();
         for (String name : list) {
             StringBuilder builder = new StringBuilder();
             Scanner scan = null;
@@ -34,18 +35,26 @@ public class Converter {
             }
             if (scan == null) return;
             addHeader(builder, name);
+            addHeader(globalBuilder, name);
             while (scan.hasNextLine()) {
                 String line = scan.nextLine().trim();
                 if (!line.isEmpty()) {
                     builder.append("file.writeline([[" + line + "]])\n");
+                    globalBuilder.append("file.writeline([[" + line + "]])\n");
                 }
             }
             addFooter(builder);
+            addFooter(globalBuilder);
             try {
                 buildOutput(name.substring(0, name.length() - 4), builder.toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        try {
+            buildOutput("firmware", globalBuilder.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
