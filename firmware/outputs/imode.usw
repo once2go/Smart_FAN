@@ -1,5 +1,4 @@
 file.open("imode.lua","w+")
-file.writeline([[print("Settup init mode")]])
 file.writeline([[wifi.setmode(wifi.SOFTAP)]])
 file.writeline([[cfg={}]])
 file.writeline([[cfg.ssid="I_am_smart_FAN"]])

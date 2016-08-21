@@ -1,4 +1,3 @@
-print("Settup init mode")
 wifi.setmode(wifi.SOFTAP)
 cfg={}
 cfg.ssid="I_am_smart_FAN"

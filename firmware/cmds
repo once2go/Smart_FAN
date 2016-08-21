@@ -1,0 +1,125 @@
+cmds
+
+{"credentials":"set"}
+
+{"ssid":""}
+
+{"ssid":"Petcube_SoHaOp"}
+
+{"password":"~1234567890"}
+
+{"config":true}
+
+
+print(gpio.read(6))
+
+gpio.mode(6, gpio.OUTPUT)
+
+pin=7
+gpio.mode(pin, gpio.OUTPUT)
+gpio.write(pin, gpio.LOW)
+
+
+16 14 12 13 5 4 0 2 15
+
+file.remove("init.lua")
+
+
+16[0] - main on/off
+
+14[5] - eng_low
+12[6] - eng_mid
+13[7] - eng_hig
+
+5[1]
+4[2]
+0[3]
+2[4] - button
+15[8] - rotator
+
+
+pin = 4
+gpio.mode(pin,gpio.INT,gpio.PULLUP)
+
+function pin1cb()
+     print("HIHIHI")
+     tmr.delay(1000)
+end
+gpio.trig(pin, "down",pin1cb)
+
+
+file.remove("init.lua")
+
+{"help_get":"1"}
+
+{"power_get":"1"}
+
+{"speed_get":"1"}
+
+{"rotate_get":"1"}
+
+{"climat_get": 1}
+
+
+
+{"power_set":false}
+
+{"power_set":true}
+
+
+{"rotate_set":true}
+
+{"rotate_set":false}
+
+
+
+{"speed_set": 435}
+
+{"speed_set": 436}
+
+{"speed_set": 437}
+
+
+
+
+pin = 1
+status, temp, humi, temp_dec, humi_dec = dht.read(pin)
+if status == dht.OK then
+    -- Integer firmware using this example
+    print(string.format("DHT Temperature:%d.%03d;Humidity:%d.%03d\r\n",
+          math.floor(temp),
+          temp_dec,
+          math.floor(humi),
+          humi_dec
+    ))
+
+    -- Float firmware using this example
+    print("DHT Temperature:"..temp..";".."Humidity:"..humi)
+
+elseif status == dht.ERROR_CHECKSUM then
+    print( "DHT Checksum error." )
+elseif status == dht.ERROR_TIMEOUT then
+    print( "DHT timed out." )
+end
+
+
+l = file.list();
+for k,v in pairs(l) do
+  print("name:"..k..", size:"..v)
+end
+
+
+
+
+
+
+bmp180_init(SDA_PIN, SCL_PIN)
+
+t = bmp180_getTemperature()
+p = bmp180_getPressure()
+
+print("Pressure: "..(p).." Pa")
+print("Temperature: "..(t).." C")
+print("Pressure: "..(p / 100).."."..(p % 100).." hPa")
+print("Pressure: "..(p / 100).."."..(p % 100).." mbar")
+print("Pressure: "..(p * 75 / 10000).."."..((p * 75 % 10000) / 1000).." mmHg")

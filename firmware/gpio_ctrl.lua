@@ -69,7 +69,7 @@ function handle_interupt()
 end
 
 function read_t_h() 
-resp = ''	
+resp = ''
 status, temp, humi, temp_dec, humi_dec = dht.read(DHT)
 if status == dht.OK then
         resp = '{"data":{"temp":'..temp..', "hum":'..humi..'}}'
@@ -78,12 +78,16 @@ if status == dht.OK then
 	elseif status == dht.ERROR_TIMEOUT then
 	    resp = "DHT timed out." 
 	end
+	print(resp)
 	return resp
 end
 
-
 gpio.trig(BUTTON, "down", handle_interupt)
-dofile("settings.lua")
+
+l = file.list();
+for k,v in pairs(l) do
+  if k == "settings.lua" then dofile("settings.lua") end
+end
 set_power_on(IS_POWER_ON)
 set_mode(tonumber(FAN_MODE))
 set_rotate(IS_ROTATE)
